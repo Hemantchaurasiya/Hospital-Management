@@ -1,7 +1,9 @@
 package com.hospitalmanagement.Hospital.Management.Controller;
 
+import com.hospitalmanagement.Hospital.Management.Dto.DoctorDto;
 import com.hospitalmanagement.Hospital.Management.Dto.PatientDto;
 import com.hospitalmanagement.Hospital.Management.Service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,12 @@ public class PatientController {
 
     @Autowired
     private PatientService patientService;
+
+    @PostMapping("/register")
+    public ResponseEntity<PatientDto> registerDoctor(@Valid @RequestBody PatientDto patientDto){
+        PatientDto patient = patientService.registerPatient(patientDto);
+        return new ResponseEntity<PatientDto>(patient,HttpStatus.CREATED);
+    }
 
     @GetMapping("/{patientId}")
     public ResponseEntity<PatientDto> getPatientById(@PathVariable("patientId") Integer id){

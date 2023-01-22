@@ -19,6 +19,14 @@ public class PatientServiceImpl implements PatientService {
     private PatientRepository patientRepository;
     @Autowired
     private ModelMapper modelMapper;
+
+    @Override
+    public PatientDto registerPatient(PatientDto patientDto) {
+        Patient patient = modelMapper.map(patientDto,Patient.class);
+        Patient savedPatient = patientRepository.save(patient);
+        return modelMapper.map(savedPatient,PatientDto.class);
+    }
+
     @Override
     public PatientDto getPatientById(Integer id) {
         Patient patient = patientRepository.findById(id)
