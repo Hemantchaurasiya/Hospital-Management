@@ -1,10 +1,45 @@
 package com.hospitalmanagement.Hospital.Management.Controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.hospitalmanagement.Hospital.Management.Dto.PatientDto;
+import com.hospitalmanagement.Hospital.Management.Service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(name = "/api/v1/patient")
+@RequestMapping("/api/v1/patient")
 public class PatientController {
 
+    @Autowired
+    private PatientService patientService;
+
+    @GetMapping("/{patientId}")
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable("patientId") Integer id){
+        PatientDto patientDto = patientService.getPatientById(id);
+        return new ResponseEntity<PatientDto>(patientDto, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PatientDto>> getAllPatients(){
+        List<PatientDto> patientDtoList = patientService.getAllPatients();
+        return new ResponseEntity<List<PatientDto>>(patientDtoList,HttpStatus.OK);
+    }
+
+    @PutMapping("/{patientId}")
+    public ResponseEntity<PatientDto> updatePatient(
+            @RequestBody PatientDto patientDto,
+            @PathVariable("patientId") Integer id
+    ){
+        PatientDto savedPatient = patientService.updatePatient(patientDto,id);
+        return new ResponseEntity<PatientDto>(savedPatient,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{patientId}")
+    public ResponseEntity<String> deletePatient(@PathVariable("patientId") Integer id){
+        patientService.deletePatient(id);
+        return new ResponseEntity<String>("Patient is deleted", HttpStatus.OK);
+    }
 }

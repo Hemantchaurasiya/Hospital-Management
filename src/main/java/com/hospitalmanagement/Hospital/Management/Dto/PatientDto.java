@@ -1,5 +1,19 @@
 package com.hospitalmanagement.Hospital.Management.Dto;
 
-public class PatientDto extends UserDto{
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PatientDto extends UserDto{
+    private String address;
+    private int age;
+    private String image;
+    private float height;
+    private float weight;
+    private String bloodGroup;
 }

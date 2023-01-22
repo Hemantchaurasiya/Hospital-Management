@@ -5,8 +5,7 @@ import com.hospitalmanagement.Hospital.Management.Dto.PatientDto;
 import java.util.List;
 
 public interface PatientService {
-    PatientDto registerPatient(PatientDto patientDto);
-    PatientDto getPatientById(PatientDto patientDto);
+    PatientDto getPatientById(Integer id);
     List<PatientDto> getPatientByName(String name);
     PatientDto getPatientByPhone(String phone);
     PatientDto getPatientByEmail(String email);

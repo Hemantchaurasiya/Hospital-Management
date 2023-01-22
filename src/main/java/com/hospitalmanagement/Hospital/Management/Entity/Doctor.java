@@ -1,6 +1,7 @@
 package com.hospitalmanagement.Hospital.Management.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Doctor extends User{
+    private String address;
     private int age;
     private String image;
     private String department;

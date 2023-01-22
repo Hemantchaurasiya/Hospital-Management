@@ -1,19 +1,20 @@
 package com.hospitalmanagement.Hospital.Management.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Entity
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer userid;
 
     @Column(name = "firstname" ,nullable = false)
     private String firstname;
@@ -30,11 +31,8 @@ public class User {
     @Column(name = "phone" ,nullable = false)
     private String phone;
 
-    @Column(name = "address" ,nullable = false)
-    private String address;
-
     @Column(name = "role" ,nullable = false)
-    private boolean role;
+    private String role;
 
     private boolean activate = false;
 }
